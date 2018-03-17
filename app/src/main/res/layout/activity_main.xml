@@ -22,7 +22,7 @@
         app:layout_constraintHorizontal_bias="0.043"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:textColor="@android:color/background_light" />
+        android:textColor="@color/colorPrimaryText" />
 
     <TextView
         android:id="@+id/textView2"
@@ -42,7 +42,15 @@
         android:id="@+id/mainOptionsList"
         android:layout_width="272dp"
         android:layout_height="330dp"
-        tools:layout_editor_absoluteX="69dp"
-        tools:layout_editor_absoluteY="234dp" />
-
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="?attr/colorBackgroundFloating"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.891" />
 </android.support.constraint.ConstraintLayout>
