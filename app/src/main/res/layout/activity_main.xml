@@ -14,11 +14,12 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="24dp"
         android:text="Algebra"
         android:textSize="60sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.043"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:textColor="@android:color/background_light" />
@@ -26,9 +27,22 @@
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="51dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:text="SUPPORTING"
-        android:textSize="40sp"
-        tools:layout_editor_absoluteX="151dp"
-        tools:layout_editor_absoluteY="145dp" />
+        android:textColor="@android:color/holo_orange_dark"
+        android:textSize="35sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.824"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <ListView
+        android:id="@+id/mainOptionsList"
+        android:layout_width="272dp"
+        android:layout_height="330dp"
+        tools:layout_editor_absoluteX="69dp"
+        tools:layout_editor_absoluteY="234dp" />
+
 </android.support.constraint.ConstraintLayout>
