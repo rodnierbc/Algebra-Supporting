@@ -1,5 +1,6 @@
 package com.epicodus.algebrasupporting;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -22,14 +23,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        MainOptionsArrayAdapter adapter = new MainOptionsArrayAdapter(this, android.R.layout.simple_list_item_single_choice, mOptions ); //must match constructor!
+        final MainOptionsArrayAdapter adapter = new MainOptionsArrayAdapter(this, android.R.layout.simple_list_item_single_choice, mOptions ); //must match constructor!
         mMainOptionsList.setAdapter(adapter);
 
         mMainOptionsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String restaurant = ((TextView)view).getText().toString();
-
+                String option = adapter.getItem(i).toString();
+                Intent intent = new Intent(MainActivity.this, SolveActivity.class);
+                startActivity(intent);
             }
         });
 
