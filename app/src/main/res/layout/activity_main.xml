@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:background="@color/colorPrimary"
     android:background="@color/colorPrimary"
+    tools:background="@color/colorPrimary"
     tools:context="com.epicodus.algebrasupporting.MainActivity">
 
     <TextView
@@ -37,21 +37,37 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/algebraText" />
 
-    <ListView
-        android:id="@+id/mainOptionsList"
-        android:layout_width="348dp"
-        android:layout_height="192dp"
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view2"
+        android:layout_width="379dp"
+        android:layout_height="293dp"
+        android:layout_gravity="center"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:background="?attr/colorBackgroundFloating"
+        app:cardCornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/algebraText"
-        app:layout_constraintVertical_bias="0.728" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.931">
+        <ListView
+            android:id="@+id/mainOptionsList"
+            android:layout_width="309dp"
+            android:layout_height="163dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:background="?attr/colorBackgroundFloating"
+            app:layout_constraintBottom_toBottomOf="@+id/card_view2"
+            app:layout_constraintEnd_toEndOf="@+id/card_view2"
+            app:layout_constraintStart_toStartOf="@+id/card_view2"
+            app:layout_constraintTop_toTopOf="@+id/card_view2" />
+
+    </android.support.v7.widget.CardView>
+
 
 
 
