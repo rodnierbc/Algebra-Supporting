@@ -1,4 +1,4 @@
-package com.epicodus.algebrasupporting;
+package com.epicodus.algebrasupporting.ui;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.epicodus.algebrasupporting.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
