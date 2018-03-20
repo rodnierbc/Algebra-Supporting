@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        final MainOptionsArrayAdapter adapter = new MainOptionsArrayAdapter(this, android.R.layout.simple_list_item_single_choice, mOptions ); //must match constructor!
+        final MainOptionsArrayAdapter adapter = new MainOptionsArrayAdapter(this, android.R.layout.simple_list_item_1, mOptions ); //must match constructor!
         mMainOptionsList.setAdapter(adapter);
 
         mMainOptionsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
