@@ -29,7 +29,7 @@ public class WolframAlphaService {
                 .build();
 
         HttpUrl.Builder urlBuilder = HttpUrl.parse(Constants.WOLFRAM_ALPHA_BASE_URL).newBuilder();
-        urlBuilder.addQueryParameter(Constants.WOLFRAM_ALPHA_INPUT_QUERY_PARAMETER, Constants.WOLFRAM_ALPHA_OPERATION_VALUE_1.concat(input));
+        urlBuilder.addQueryParameter(Constants.WOLFRAM_ALPHA_INPUT_QUERY_PARAMETER, Constants.WOLFRAM_ALPHA_OPERATION_VALUE_1.concat(input).concat(" for x"));
         urlBuilder.addQueryParameter(Constants.WOLFRAM_ALPHA_OUTPUT_QUERY_PARAMETER, Constants.WOLFRAM_ALPHA_OUTPUT_VALUE_1);
         urlBuilder.addQueryParameter(Constants.WOLFRAM_ALPHA_PODSTATE_QUERY_PARAMETER, Constants.WOLFRAM_ALPHA_PODSTATE_VALUE_1);
         urlBuilder.addQueryParameter(Constants.WOLFRAM_ALPHA_APP_ID_QUERY_PARAMETER, Constants.WOLFRAM_ALPHA_TOKEN);
@@ -42,28 +42,30 @@ public class WolframAlphaService {
         Call call = client.newCall(request);
         call.enqueue(callback);
     }
-    public SolveResult processResults(Response response) {
-        String inputInterpretationPlainText = "";
-        String inputInterpretationImageUrl = "";
-        String resultsPlainText = "";
-        String resultsPlainTextImageUrl = "";
-        ArrayList<String> possibleIntermediateStepsPlainText = new ArrayList<>();
-        String possibleIntermediateStepsImageUrl = "";
-        String plotImageUrl = "";
+    public ArrayList<ArrayList<String>> processResults(Response response) {
+        ArrayList<ArrayList<String>> pods = new ArrayList<>();
         try {
             String jsonData = response.body().string();
             Log.v(TAG,jsonData);
             JSONObject solveResultJSON = new JSONObject(jsonData);
-            JSONArray queryresultJSON = solveResultJSON.getJSONObject("queryresult").getJSONArray("pods");
-            for (int i = 0; i < queryresultJSON.length(); i++) {
-                JSONObject item = queryresultJSON.getJSONObject(i);
-                JSONArray subpods = item.getJSONArray("subpods");
-                for (int j = 0; j < subpods.length(); j++) {
-                    JSONObject subpodsItem = subpods.getJSONObject(j);
-                    inputInterpretationPlainText = subpodsItem.getString("plaintext");
-
+            JSONArray podsJSON = solveResultJSON.getJSONObject("queryresult").getJSONArray("pods");
+            for (int i = 0; i < podsJSON.length(); i++) {
+                ArrayList<String> subpods = new ArrayList<>();
+                JSONObject pod = podsJSON.getJSONObject(i);
+                String title = pod.getString("title");
+                JSONArray subpodsJSON = pod.getJSONArray("subpods");
+                for (int j = 0; j < subpodsJSON.length(); j++) {
+                    JSONObject subpod = subpodsJSON.getJSONObject(j);
+                    if(!subpod.getString("title").equals("")){
+                        subpods.add(title);
+                    }
+                    else {
+                        subpods.add(subpod.getString("title"));
+                    }
+                    subpods.add(subpod.getString("src"));
+                    subpods.add("plaintext");
                 }
-
+                pods.add(subpods);
             }
         }
         catch (IOException e){
@@ -72,6 +74,6 @@ public class WolframAlphaService {
         catch (JSONException e){
             e.printStackTrace();
         }
-        return new SolveResult(inputInterpretationPlainText, inputInterpretationImageUrl, resultsPlainText, resultsPlainTextImageUrl, possibleIntermediateStepsPlainText, possibleIntermediateStepsImageUrl, plotImageUrl);
+        return pods;
     }
 }

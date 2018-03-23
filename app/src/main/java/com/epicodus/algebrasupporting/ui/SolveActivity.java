@@ -25,7 +25,6 @@ import butterknife.ButterKnife;
  */
 
 public class SolveActivity extends AppCompatActivity implements View.OnClickListener {
-
     @BindView(R.id.inputInterpretationSolve)
     EditText mInputInterpretationSolve;
     @BindView(R.id.inputForVariable)

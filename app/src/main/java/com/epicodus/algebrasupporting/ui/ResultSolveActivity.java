@@ -24,7 +24,7 @@ import okhttp3.Response;
 
 public class ResultSolveActivity extends AppCompatActivity {
     public static final String TAG = ResultSolveActivity.class.getSimpleName();
-    public SolveResult solveResult;
+    public ArrayList<ArrayList<String>> solveResult;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
