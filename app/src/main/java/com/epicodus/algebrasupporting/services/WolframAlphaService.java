@@ -29,14 +29,14 @@ public class WolframAlphaService {
                 .build();
 
         HttpUrl.Builder urlBuilder = HttpUrl.parse(Constants.WOLFRAM_ALPHA_BASE_URL).newBuilder();
-        urlBuilder.addQueryParameter(Constants.WOLFRAM_ALPHA_INPUT_QUERY_PARAMETER, input.concat(Constants.WOLFRAM_ALPHA_OPERATION_VALUE_1));
+        urlBuilder.addQueryParameter(Constants.WOLFRAM_ALPHA_INPUT_QUERY_PARAMETER, Constants.WOLFRAM_ALPHA_OPERATION_VALUE_1.concat(input));
         urlBuilder.addQueryParameter(Constants.WOLFRAM_ALPHA_OUTPUT_QUERY_PARAMETER, Constants.WOLFRAM_ALPHA_OUTPUT_VALUE_1);
-        urlBuilder.addQueryParameter(Constants.WOLFRAM_ALPHA_PODSTATE_QUERY_PARAMETER, Constants.WOLFRAM_ALPHA_PODSTATE_QUERY_PARAMETER);
+        urlBuilder.addQueryParameter(Constants.WOLFRAM_ALPHA_PODSTATE_QUERY_PARAMETER, Constants.WOLFRAM_ALPHA_PODSTATE_VALUE_1);
+        urlBuilder.addQueryParameter(Constants.WOLFRAM_ALPHA_APP_ID_QUERY_PARAMETER, Constants.WOLFRAM_ALPHA_TOKEN);
         String url = urlBuilder.build().toString();
-
+        System.out.println(url);
         Request request= new Request.Builder()
                 .url(url)
-                .header("Authorization", Constants.WOLFRAM_ALPHA_TOKEN)
                 .build();
 
         Call call = client.newCall(request);
@@ -52,14 +52,16 @@ public class WolframAlphaService {
         String plotImageUrl = "";
         try {
             String jsonData = response.body().string();
+            Log.v(TAG,jsonData);
             JSONObject solveResultJSON = new JSONObject(jsonData);
-            JSONArray queryresultJSON = solveResultJSON.getJSONArray("queryresult.pods");
+            JSONArray queryresultJSON = solveResultJSON.getJSONObject("queryresult").getJSONArray("pods");
             for (int i = 0; i < queryresultJSON.length(); i++) {
                 JSONObject item = queryresultJSON.getJSONObject(i);
                 JSONArray subpods = item.getJSONArray("subpods");
                 for (int j = 0; j < subpods.length(); j++) {
                     JSONObject subpodsItem = subpods.getJSONObject(j);
                     inputInterpretationPlainText = subpodsItem.getString("plaintext");
+
                 }
 
             }

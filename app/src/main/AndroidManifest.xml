@@ -25,6 +25,12 @@
                 android:value="com.epicodus.algebrasupporting.ui.SolveActivity">
             </meta-data>
         </activity>
+        <activity android:name=".ui.ResultSolveActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.epicodus.algebrasupporting.ui.ResultSolveActivity">
+            </meta-data>
+        </activity>
     </application>
 
 </manifest>
