@@ -34,7 +34,6 @@ public class ResultSolveActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String interpretationSolve = intent.getStringExtra("interpretationSolve");
         String inputForVariable = intent.getStringExtra("inputForVariable");
-
         getSolveResult(interpretationSolve);
     }
     private void getSolveResult(String interpretationSolve) {
@@ -49,13 +48,16 @@ public class ResultSolveActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call call, Response response) {
                 solveResult = wolframAlphaService.processResults(response);
-
                 ResultSolveActivity.this.runOnUiThread(new Runnable() {
-
                     @Override
                     public void run() {
-                        String example = solveResult.getInputInterpretationPlainText();
-                        Log.v(TAG,example);
+                        for (int i =0; i<solveResult.size(); i++){
+                            for (int j =0; j<solveResult.get(i).size(); j++){
+                                System.out.println(solveResult.get(i).get(j)+"------------>");
+                            }
+                            System.out.println("----------------------------------------------------------->");
+
+                        }
 
                     }
                 });

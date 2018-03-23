@@ -46,24 +46,22 @@ public class WolframAlphaService {
         ArrayList<ArrayList<String>> pods = new ArrayList<>();
         try {
             String jsonData = response.body().string();
-            Log.v(TAG,jsonData);
             JSONObject solveResultJSON = new JSONObject(jsonData);
             JSONArray podsJSON = solveResultJSON.getJSONObject("queryresult").getJSONArray("pods");
             for (int i = 0; i < podsJSON.length(); i++) {
                 ArrayList<String> subpods = new ArrayList<>();
                 JSONObject pod = podsJSON.getJSONObject(i);
-                String title = pod.getString("title");
                 JSONArray subpodsJSON = pod.getJSONArray("subpods");
                 for (int j = 0; j < subpodsJSON.length(); j++) {
                     JSONObject subpod = subpodsJSON.getJSONObject(j);
                     if(!subpod.getString("title").equals("")){
-                        subpods.add(title);
-                    }
-                    else {
                         subpods.add(subpod.getString("title"));
                     }
-                    subpods.add(subpod.getString("src"));
-                    subpods.add("plaintext");
+                    else {
+                        subpods.add(pod.getString("title"));
+                    }
+                    subpods.add(subpod.getJSONObject("img").getString("src"));
+                    subpods.add(subpod.getString("plaintext"));
                 }
                 pods.add(subpods);
             }
