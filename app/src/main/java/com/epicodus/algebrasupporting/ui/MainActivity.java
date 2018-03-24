@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.epicodus.algebrasupporting.MainOptionsArrayAdapter;
+import com.epicodus.algebrasupporting.Adapters.MainOptionsArrayAdapter;
 import com.epicodus.algebrasupporting.R;
 
 import butterknife.BindView;

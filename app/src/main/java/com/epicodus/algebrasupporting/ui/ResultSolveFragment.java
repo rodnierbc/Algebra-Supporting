@@ -21,6 +21,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class ResultSolveFragment extends Fragment {
+    private static final int MAX_WIDTH = 50;
+    private static final int MAX_HEIGHT = 25;
 
     @BindView(R.id.inputInterpretationTitleTextView) TextView mInputInterpretationTitleTextView;
     @BindView(R.id.inputInterpretationImageImageView) ImageView mInputInterpretationImageImageView;
@@ -30,13 +32,14 @@ public class ResultSolveFragment extends Fragment {
     private ArrayList<ArrayList<String>> mSolveResultArrayList;
     private SolveResult mSolveResult;
 
-    public static ResultSolveFragment newInstance(ArrayList solveResult) {
+    public static ResultSolveFragment newInstance(ArrayList<ArrayList<String>> mSolveResultArrayList) {
         ResultSolveFragment resultSolveFragment = new ResultSolveFragment();
         Bundle args = new Bundle();
-        args.putParcelable("solveResult", Parcels.wrap(solveResult));
+        args.putParcelable("solveResult", Parcels.wrap(mSolveResultArrayList));
         resultSolveFragment.setArguments(args);
         return resultSolveFragment;
     }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,6 +58,7 @@ public class ResultSolveFragment extends Fragment {
                     mInputInterpretationTitleTextView.setText(mSolveResultArrayList.get(i).get(j));
                     Picasso.with(view.getContext())
                             .load(mSolveResultArrayList.get(i).get(j+1))
+                            .resize(MAX_WIDTH, MAX_HEIGHT)
                             .centerCrop()
                             .into(mInputInterpretationImageImageView);
                 }
@@ -62,13 +66,12 @@ public class ResultSolveFragment extends Fragment {
                     mResultsTitleTextView.setText(mSolveResultArrayList.get(i).get(j));
                     Picasso.with(view.getContext())
                             .load(mSolveResultArrayList.get(i).get(j+1))
+                            .resize(MAX_WIDTH, MAX_HEIGHT)
                             .centerCrop()
                             .into(mResultsImageImageView);
-
                 }
             }
         }
-
         return view;
     }
 }

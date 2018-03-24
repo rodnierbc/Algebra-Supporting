@@ -1,7 +1,10 @@
 package com.epicodus.algebrasupporting.ui;
 
+import android.support.v4.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ArrayAdapter;
@@ -22,9 +25,9 @@ import okhttp3.Response;
  * Created by rodnier.borrego on 3/17/18.
  */
 
-public class ResultSolveActivity extends AppCompatActivity {
+public class ResultSolveActivity extends AppCompatActivity{
     public static final String TAG = ResultSolveActivity.class.getSimpleName();
-    public ArrayList<ArrayList<String>> solveResult;
+    public ArrayList<ArrayList<String>> solveResultArrayList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,21 +50,36 @@ public class ResultSolveActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call call, Response response) {
-                solveResult = wolframAlphaService.processResults(response);
+                solveResultArrayList = wolframAlphaService.processResults(response);
                 ResultSolveActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        for (int i =0; i<solveResult.size(); i++){
-                            for (int j =0; j<solveResult.get(i).size(); j++){
-                                System.out.println(solveResult.get(i).get(j)+"------------>");
-                            }
-                            System.out.println("----------------------------------------------------------->");
-
-                        }
-
+                        Fragment resultSolveFragment = ResultSolveFragment.newInstance(solveResultArrayList);
+                        setDefaultFragment(resultSolveFragment);
                     }
                 });
             }
+
+
         });
+
+    }
+    private void setDefaultFragment(Fragment defaultFragment) {
+        this.replaceFragment(defaultFragment);
+    }
+    // Replace current Fragment with the destination Fragment.
+    public void replaceFragment(Fragment destFragment)
+    {
+        // First get FragmentManager object.
+        FragmentManager fragmentManager = this.getSupportFragmentManager();
+
+        // Begin Fragment transaction.
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        // Replace the layout holder with the required Fragment object.
+        fragmentTransaction.replace(R.id.solveResultFragmentsContentFrameLayout, destFragment);
+
+        // Commit the Fragment replace action.
+        fragmentTransaction.commit();
     }
 }

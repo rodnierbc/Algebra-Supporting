@@ -1,4 +1,4 @@
-package com.epicodus.algebrasupporting;
+package com.epicodus.algebrasupporting.Adapters;
 
 import android.content.Context;
 import android.widget.ArrayAdapter;
