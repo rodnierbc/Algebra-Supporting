@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.epicodus.algebrasupporting.Constants;
 import com.epicodus.algebrasupporting.R;
 import com.epicodus.algebrasupporting.models.SolveResult;
 import com.squareup.picasso.Picasso;
@@ -22,11 +23,11 @@ import butterknife.ButterKnife;
 public class ResultSolveFragment extends Fragment {
 
     @BindView(R.id.inputInterpretationTitleTextView) TextView mInputInterpretationTitleTextView;
-    @BindView(R.id.inputInterpretationImageImageView) TextView mInputInterpretationImageImageView;
+    @BindView(R.id.inputInterpretationImageImageView) ImageView mInputInterpretationImageImageView;
     @BindView(R.id.resultsTitleTextView) TextView mResultsTitleTextView;
-    @BindView(R.id.resultsImageImageView) TextView mResultsImageImageView;
+    @BindView(R.id.resultsImageImageView) ImageView mResultsImageImageView;
 
-    private ArrayList<String> mSolveResultArrayList;
+    private ArrayList<ArrayList<String>> mSolveResultArrayList;
     private SolveResult mSolveResult;
 
     public static ResultSolveFragment newInstance(ArrayList solveResult) {
@@ -48,17 +49,25 @@ public class ResultSolveFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_result_solve_step, container, false);
         ButterKnife.bind(this, view);
 
-        Picasso.with(view.getContext())
-                .load(mRestaurant.getImageUrl())
-                .resize(MAX_WIDTH, MAX_HEIGHT)
-                .centerCrop()
-                .into(mImageLabel);
+        for(int i=0; i<mSolveResultArrayList.size(); i++){
+            for(int j=0; j<mSolveResultArrayList.get(i).size(); j++){
+                if(mSolveResultArrayList.get(i).get(j).equals(Constants.WOLFRAM_ALPHA_INPUT_INTERPRETATION_TITLE)){
+                    mInputInterpretationTitleTextView.setText(mSolveResultArrayList.get(i).get(j));
+                    Picasso.with(view.getContext())
+                            .load(mSolveResultArrayList.get(i).get(j+1))
+                            .centerCrop()
+                            .into(mInputInterpretationImageImageView);
+                }
+                else if(mSolveResultArrayList.get(i).get(j).equals(Constants.WOLFRAM_ALPHA_RESULTS_TITLE)){
+                    mResultsTitleTextView.setText(mSolveResultArrayList.get(i).get(j));
+                    Picasso.with(view.getContext())
+                            .load(mSolveResultArrayList.get(i).get(j+1))
+                            .centerCrop()
+                            .into(mResultsImageImageView);
 
-        mNameLabel.setText(mRestaurant.getName());
-        mCategoriesLabel.setText(android.text.TextUtils.join(", ", mRestaurant.getCategories()));
-        mRatingLabel.setText(Double.toString(mRestaurant.getRating()) + "/5");
-        mPhoneLabel.setText(mRestaurant.getPhone());
-        mAddressLabel.setText(android.text.TextUtils.join(", ", mRestaurant.getAddress()));
+                }
+            }
+        }
 
         return view;
     }
