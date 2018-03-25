@@ -21,13 +21,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class ResultSolveFragment extends Fragment {
-    private static final int MAX_WIDTH = 50;
-    private static final int MAX_HEIGHT = 25;
 
     @BindView(R.id.inputInterpretationTitleTextView) TextView mInputInterpretationTitleTextView;
     @BindView(R.id.inputInterpretationImageImageView) ImageView mInputInterpretationImageImageView;
     @BindView(R.id.resultsTitleTextView) TextView mResultsTitleTextView;
     @BindView(R.id.resultsImageImageView) ImageView mResultsImageImageView;
+    @BindView(R.id.plotTitleTextView) TextView mPlotTitleTextView;
+    @BindView(R.id.plotImageImageImageView) ImageView mPlotImageImageImageView;
 
     private ArrayList<ArrayList<String>> mSolveResultArrayList;
     private SolveResult mSolveResult;
@@ -56,20 +56,31 @@ public class ResultSolveFragment extends Fragment {
             for(int j=0; j<mSolveResultArrayList.get(i).size(); j++){
                 if(mSolveResultArrayList.get(i).get(j).equals(Constants.WOLFRAM_ALPHA_INPUT_INTERPRETATION_TITLE)){
                     mInputInterpretationTitleTextView.setText(mSolveResultArrayList.get(i).get(j));
+                    //Picasso.with(view.getContext()).load(mSolveResultArrayList.get(i).get(j+1)).into(mInputInterpretationImageImageView);
                     Picasso.with(view.getContext())
                             .load(mSolveResultArrayList.get(i).get(j+1))
-                            .resize(MAX_WIDTH, MAX_HEIGHT)
+                            .resize(1500, 150)
                             .centerCrop()
                             .into(mInputInterpretationImageImageView);
                 }
                 else if(mSolveResultArrayList.get(i).get(j).equals(Constants.WOLFRAM_ALPHA_RESULTS_TITLE)){
                     mResultsTitleTextView.setText(mSolveResultArrayList.get(i).get(j));
+                   // Picasso.with(view.getContext()).load(mSolveResultArrayList.get(i).get(j+1)).into(mResultsImageImageView);
                     Picasso.with(view.getContext())
                             .load(mSolveResultArrayList.get(i).get(j+1))
-                            .resize(MAX_WIDTH, MAX_HEIGHT)
+                            .resize(400, 100)
                             .centerCrop()
                             .into(mResultsImageImageView);
                 }
+                //else if(mSolveResultArrayList.get(i).get(j).equals(Constants.WOLFRAM_ALPHA_ROOT_PLOT_TITLE)){
+                    mPlotTitleTextView.setText(mSolveResultArrayList.get(2).get(0));
+                    // Picasso.with(view.getContext()).load(mSolveResultArrayList.get(i).get(j+1)).into(mResultsImageImageView);
+                    Picasso.with(view.getContext())
+                            .load(mSolveResultArrayList.get(2).get(1))
+                            .resize(400, 100)
+                            .centerCrop()
+                            .into(mPlotImageImageImageView);
+                //}
             }
         }
         return view;
