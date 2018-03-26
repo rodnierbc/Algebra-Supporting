@@ -59,8 +59,8 @@ public class ResultSolveStepFragment extends Fragment {
                     //Picasso.with(view.getContext()).load(mSolveResultArrayList.get(i).get(j+1)).into(mInputInterpretationImageImageView);
                     Picasso.with(view.getContext())
                             .load(mSolveResultArrayList.get(i).get(j+1))
-                            .resize(1500, 150)
-                            .centerCrop()
+//                            .resize(1500, 150)
+//                            .centerCrop()
                             .into(mInputInterpretationImageImageView);
                 }
                 else if(mSolveResultArrayList.get(i).get(j).equals(Constants.WOLFRAM_ALPHA_RESULTS_TITLE)){
@@ -68,8 +68,8 @@ public class ResultSolveStepFragment extends Fragment {
                    // Picasso.with(view.getContext()).load(mSolveResultArrayList.get(i).get(j+1)).into(mResultsImageImageView);
                     Picasso.with(view.getContext())
                             .load(mSolveResultArrayList.get(i).get(j+1))
-                            .resize(400, 100)
-                            .centerCrop()
+//                            .resize(400, 100)
+//                            .centerCrop()
                             .into(mResultsImageImageView);
                 }
                 //else if(mSolveResultArrayList.get(i).get(j).equals(Constants.WOLFRAM_ALPHA_ROOT_PLOT_TITLE)){
@@ -77,8 +77,8 @@ public class ResultSolveStepFragment extends Fragment {
                     // Picasso.with(view.getContext()).load(mSolveResultArrayList.get(i).get(j+1)).into(mResultsImageImageView);
                     Picasso.with(view.getContext())
                             .load(mSolveResultArrayList.get(2).get(1))
-                            .resize(400, 100)
-                            .centerCrop()
+//                            .resize(400, 100)
+//                            .centerCrop()
                             .into(mPlotImageImageImageView);
                 //}
             }

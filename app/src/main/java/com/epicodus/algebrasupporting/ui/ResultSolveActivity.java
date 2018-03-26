@@ -31,6 +31,8 @@ public class ResultSolveActivity extends AppCompatActivity implements View.OnCli
     public ArrayList<ArrayList<String>> solveResultArrayList;
     @BindView(R.id.solveResultShowStepsButton)
     Button mSolveResultShowStepsButton;
+    @BindView(R.id.solveResultSaveButton)
+    Button mSolveResultSaveButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +43,10 @@ public class ResultSolveActivity extends AppCompatActivity implements View.OnCli
         String interpretationSolve = intent.getStringExtra("interpretationSolve");
         String inputForVariable = intent.getStringExtra("inputForVariable");
         getSolveResult(interpretationSolve);
+        mSolveResultShowStepsButton.setVisibility(View.INVISIBLE);
+        mSolveResultSaveButton.setVisibility(View.INVISIBLE);
         mSolveResultShowStepsButton.setOnClickListener(this);
+        mSolveResultSaveButton.setOnClickListener(this);
 
     }
     @Override
@@ -49,6 +54,9 @@ public class ResultSolveActivity extends AppCompatActivity implements View.OnCli
         if(v == mSolveResultShowStepsButton) {
             Fragment  resultSolveStepByStepFragment= ResultSolveStepByStepFragment.newInstance(solveResultArrayList);
             replaceFragment(resultSolveStepByStepFragment);
+        }
+        else if(v == mSolveResultSaveButton){
+            //logic create object and save in the data base
         }
     }
 
@@ -69,6 +77,9 @@ public class ResultSolveActivity extends AppCompatActivity implements View.OnCli
                     public void run() {
                         Fragment resultSolveFragment = ResultSolveStepFragment.newInstance(solveResultArrayList);
                         setDefaultFragment(resultSolveFragment);
+                        mSolveResultShowStepsButton.setVisibility(View.VISIBLE);
+                        mSolveResultSaveButton.setVisibility(View.VISIBLE);
+
                     }
                 });
             }
