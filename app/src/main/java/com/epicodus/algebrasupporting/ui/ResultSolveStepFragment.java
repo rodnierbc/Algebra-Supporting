@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ResultSolveFragment extends Fragment {
+public class ResultSolveStepFragment extends Fragment {
 
     @BindView(R.id.inputInterpretationTitleTextView) TextView mInputInterpretationTitleTextView;
     @BindView(R.id.inputInterpretationImageImageView) ImageView mInputInterpretationImageImageView;
@@ -32,8 +32,8 @@ public class ResultSolveFragment extends Fragment {
     private ArrayList<ArrayList<String>> mSolveResultArrayList;
     private SolveResult mSolveResult;
 
-    public static ResultSolveFragment newInstance(ArrayList<ArrayList<String>> mSolveResultArrayList) {
-        ResultSolveFragment resultSolveFragment = new ResultSolveFragment();
+    public static ResultSolveStepFragment newInstance(ArrayList<ArrayList<String>> mSolveResultArrayList) {
+        ResultSolveStepFragment resultSolveFragment = new ResultSolveStepFragment();
         Bundle args = new Bundle();
         args.putParcelable("solveResult", Parcels.wrap(mSolveResultArrayList));
         resultSolveFragment.setArguments(args);

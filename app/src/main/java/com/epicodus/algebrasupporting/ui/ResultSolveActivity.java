@@ -6,16 +6,17 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.widget.ArrayAdapter;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ListView;
 
 import com.epicodus.algebrasupporting.R;
-import com.epicodus.algebrasupporting.models.SolveResult;
 import com.epicodus.algebrasupporting.services.WolframAlphaService;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -25,9 +26,11 @@ import okhttp3.Response;
  * Created by rodnier.borrego on 3/17/18.
  */
 
-public class ResultSolveActivity extends AppCompatActivity{
+public class ResultSolveActivity extends AppCompatActivity implements View.OnClickListener {
     public static final String TAG = ResultSolveActivity.class.getSimpleName();
     public ArrayList<ArrayList<String>> solveResultArrayList;
+    @BindView(R.id.solveResultShowStepsButton)
+    Button mSolveResultShowStepsButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +41,17 @@ public class ResultSolveActivity extends AppCompatActivity{
         String interpretationSolve = intent.getStringExtra("interpretationSolve");
         String inputForVariable = intent.getStringExtra("inputForVariable");
         getSolveResult(interpretationSolve);
+        mSolveResultShowStepsButton.setOnClickListener(this);
+
     }
+    @Override
+    public void onClick(View v) {
+        if(v == mSolveResultShowStepsButton) {
+            Fragment  resultSolveStepByStepFragment= ResultSolveStepByStepFragment.newInstance(solveResultArrayList);
+            replaceFragment(resultSolveStepByStepFragment);
+        }
+    }
+
     private void getSolveResult(String interpretationSolve) {
         final WolframAlphaService wolframAlphaService = new WolframAlphaService();
         wolframAlphaService.findResultStepByStepSolve(interpretationSolve, new Callback() {
@@ -54,7 +67,7 @@ public class ResultSolveActivity extends AppCompatActivity{
                 ResultSolveActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Fragment resultSolveFragment = ResultSolveFragment.newInstance(solveResultArrayList);
+                        Fragment resultSolveFragment = ResultSolveStepFragment.newInstance(solveResultArrayList);
                         setDefaultFragment(resultSolveFragment);
                     }
                 });
@@ -81,5 +94,10 @@ public class ResultSolveActivity extends AppCompatActivity{
 
         // Commit the Fragment replace action.
         fragmentTransaction.commit();
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
     }
 }
