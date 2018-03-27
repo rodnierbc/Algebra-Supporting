@@ -36,7 +36,7 @@
 
         <Button
             android:id="@+id/solveResultShowStepsButton"
-            android:layout_width="171dp"
+            android:layout_width="115dp"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
             android:text="Show Steps"
@@ -46,13 +46,24 @@
 
         <Button
             android:id="@+id/solveResultSaveButton"
-            android:layout_width="211dp"
+            android:layout_width="115dp"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
-            android:text="Save Result"
+            android:text="Save"
             android:textColor="@color/colorPrimaryText"
             tools:layout_editor_absoluteX="209dp"
             tools:layout_editor_absoluteY="447dp" />
+
+        <Button
+            android:id="@+id/solveResultSendButton"
+            android:layout_width="115dp"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:text="Send"
+            android:textColor="@color/colorPrimaryText"
+            tools:layout_editor_absoluteX="209dp"
+            tools:layout_editor_absoluteY="447dp" />
+
 
     </LinearLayout>
 
