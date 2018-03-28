@@ -42,28 +42,31 @@ public class WolframAlphaService {
         Call call = client.newCall(request);
         call.enqueue(callback);
     }
-    public ArrayList<ArrayList<String>> processResults(Response response) {
-        ArrayList<ArrayList<String>> pods = new ArrayList<>();
+    public JSONObject processResults(Response response) {
+        JSONObject pods = new JSONObject();
         try {
             String jsonData = response.body().string();
             JSONObject solveResultJSON = new JSONObject(jsonData);
             JSONArray podsJSON = solveResultJSON.getJSONObject("queryresult").getJSONArray("pods");
             for (int i = 0; i < podsJSON.length(); i++) {
-                ArrayList<String> subpods = new ArrayList<>();
+                String title ="";
+
                 JSONObject pod = podsJSON.getJSONObject(i);
                 JSONArray subpodsJSON = pod.getJSONArray("subpods");
                 for (int j = 0; j < subpodsJSON.length(); j++) {
+                    JSONArray subpods = new JSONArray();
                     JSONObject subpod = subpodsJSON.getJSONObject(j);
                     if(!subpod.getString("title").equals("")){
-                        subpods.add(subpod.getString("title"));
+                        title = subpod.getString("title");
                     }
                     else {
-                        subpods.add(pod.getString("title"));
+                        title = pod.getString("title");
                     }
-                    subpods.add(subpod.getJSONObject("img").getString("src"));
-                    subpods.add(subpod.getString("plaintext"));
+                    subpods.put(subpod.getJSONObject("img").getString("src"));
+                    subpods.put(subpod.getString("plaintext"));
+                    pods.putOpt(title, subpods);
                 }
-                pods.add(subpods);
+
             }
         }
         catch (IOException e){

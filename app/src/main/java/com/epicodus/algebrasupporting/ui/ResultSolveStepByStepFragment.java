@@ -13,9 +13,13 @@ import com.epicodus.algebrasupporting.R;
 import com.epicodus.algebrasupporting.models.SolveResult;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.parceler.Parcels;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,13 +29,13 @@ public class ResultSolveStepByStepFragment extends Fragment {
     @BindView(R.id.possibleIntermediateStepsTextView) TextView mPossibleIntermediateStepsTextView;
     @BindView(R.id.resultSolveStepByStepImageView) ImageView mResultSolveStepByStepImageView;
 
-    private ArrayList<ArrayList<String>> mSolveResultStepByStepArrayList;
+    private JSONObject mSolveResultStepByStepJSON;
     private SolveResult mSolveResult;
 
-    public static ResultSolveStepByStepFragment newInstance(ArrayList<ArrayList<String>> mSolveResultStepByStepArrayList) {
+    public static ResultSolveStepByStepFragment newInstance(JSONObject mSolveResultStepByStepJSON) {
         ResultSolveStepByStepFragment resultSolveStepByStepFragment = new ResultSolveStepByStepFragment();
         Bundle args = new Bundle();
-        args.putParcelable("solveResultStepByStep", Parcels.wrap(mSolveResultStepByStepArrayList));
+        args.putParcelable("solveResultStepByStep", Parcels.wrap(mSolveResultStepByStepJSON.toString()));
         resultSolveStepByStepFragment.setArguments(args);
         return resultSolveStepByStepFragment;
     }
@@ -40,7 +44,12 @@ public class ResultSolveStepByStepFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mSolveResultStepByStepArrayList = Parcels.unwrap(getArguments().getParcelable("solveResultStepByStep"));
+        String json = Parcels.unwrap(getArguments().getParcelable("solveResultStepByStep"));
+        try {
+            mSolveResultStepByStepJSON = new JSONObject(json);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -48,19 +57,18 @@ public class ResultSolveStepByStepFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_result_solve_step_by_step, container, false);
         ButterKnife.bind(this, view);
 
-        for(int i=0; i<mSolveResultStepByStepArrayList.size(); i++){
-            for(int j=0; j<mSolveResultStepByStepArrayList.get(i).size(); j++) {
-                if (mSolveResultStepByStepArrayList.get(i).get(j).equals(Constants.WOLFRAM_ALPHA_POSSIBLE_INTERMEDIATE_STEPS_TITLE)) {
-                    mPossibleIntermediateStepsTextView.setText(mSolveResultStepByStepArrayList.get(i).get(j));
-                    //Picasso.with(view.getContext()).load(mSolveResultArrayList.get(i).get(j+1)).into(mInputInterpretationImageImageView);
-                    Picasso.with(view.getContext())
-                            .load(mSolveResultStepByStepArrayList.get(i).get(j + 1))
-//                            .resize(1500, 150)
-//                            .centerCrop()
-                            .into(mResultSolveStepByStepImageView);
+        Iterator<?> keys = mSolveResultStepByStepJSON.keys();
+        while (keys.hasNext()){
+            String key = (String)keys.next();
+            try {
+                if ( key.equals(Constants.WOLFRAM_ALPHA_POSSIBLE_INTERMEDIATE_STEPS_TITLE)) {
+                    JSONArray items = mSolveResultStepByStepJSON.getJSONArray(key);
+                    mPossibleIntermediateStepsTextView.setText(key);
+                    Picasso.with(view.getContext()).load(items.getString(0)).into(mResultSolveStepByStepImageView);
                 }
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-
         }
         return view;
     }
