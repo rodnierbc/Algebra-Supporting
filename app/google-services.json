@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "512516767211",
+    "firebase_url": "https://algebrasupporting.firebaseio.com",
+    "project_id": "algebrasupporting",
+    "storage_bucket": "algebrasupporting.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:512516767211:android:9705bf6369e2304c",
+        "android_client_info": {
+          "package_name": "com.epicodus.algebrasupporting"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "512516767211-rk34sj7luk5rssm0m78mqevk9bq274ns.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.epicodus.algebrasupporting",
+            "certificate_hash": "56b7735ba290ac926801d1bfd44955ceb78fa98c"
+          }
+        },
+        {
+          "client_id": "512516767211-97ompa3128n9u0h17f85m91qd0179mt9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAloOumWFTUAbnUay-zNWvHDry8wLmCfBg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "512516767211-97ompa3128n9u0h17f85m91qd0179mt9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -20,13 +20,19 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.epicodus.algebrasupporting.Constants;
 import com.epicodus.algebrasupporting.R;
+import com.epicodus.algebrasupporting.models.SolveResult;
 import com.epicodus.algebrasupporting.services.WolframAlphaService;
+import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -74,7 +80,8 @@ public class ResultSolveActivity extends AppCompatActivity implements View.OnCli
             replaceFragment(resultSolveStepByStepFragment);
         }
         else if(v == mSolveResultSaveButton){
-            //implement logic for to create object and save in the data base the corresponding record.
+            Fragment  resultSolveSaveFragment= ResultSolveSaveFragment.newInstance(getSolveResultObject(solveResultJSON));
+            replaceFragment(resultSolveSaveFragment);
         }
         else if(v == mSolveResultSendButton){
             pickContact();
@@ -156,5 +163,30 @@ public class ResultSolveActivity extends AppCompatActivity implements View.OnCli
             Toast.makeText(ResultSolveActivity.this,
                     "SMS faild, please try again later.", Toast.LENGTH_SHORT).show();
         }
+    }
+    protected SolveResult getSolveResultObject(JSONObject resultSolveJSON) {
+        SolveResult solveResult = new SolveResult();
+
+        Iterator<?> keys = resultSolveJSON.keys();
+        while (keys.hasNext()){
+            String key = (String)keys.next();
+            try {
+                if ( key.equals(Constants.WOLFRAM_ALPHA_INPUT_INTERPRETATION_TITLE)) {
+                    JSONArray items = resultSolveJSON.getJSONArray(key);
+                    solveResult.setInputInterpretationPlainText(items.getString(1));
+                }
+                else if( key.equals(Constants.WOLFRAM_ALPHA_RESULTS_TITLE)) {
+                    JSONArray items = resultSolveJSON.getJSONArray(key);
+                    solveResult.setResultsPlainText(items.getString(1));
+                }
+                else if(key.equals(Constants.WOLFRAM_ALPHA_POSSIBLE_INTERMEDIATE_STEPS_TITLE)) {
+                    JSONArray items = resultSolveJSON.getJSONArray(key);
+                    solveResult.setPossibleIntermediateStepsPlainText(items.getString(1));
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return solveResult;
     }
 }

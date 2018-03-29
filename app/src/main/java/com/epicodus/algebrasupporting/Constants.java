@@ -24,4 +24,6 @@ public class Constants {
     public static final String WOLFRAM_ALPHA_POSSIBLE_INTERMEDIATE_STEPS_TITLE = "Possible intermediate steps";
     public static final String WOLFRAM_ALPHA_ROOT_PLOT_TITLE = "Root plot";
 
+    public static final String FIREBASE_CHILD_RESULT_SOLVE = "result_solve";
+
 }

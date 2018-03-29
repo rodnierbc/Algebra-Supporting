@@ -1,16 +1,21 @@
 package com.epicodus.algebrasupporting.models;
 
+import org.parceler.Parcel;
+
 import java.util.ArrayList;
 
 /**
  * Created by rodnier.borrego on 3/21/18.
  */
 
+@Parcel
 public class SolveResult {
     private String inputInterpretationPlainText;
     private String resultsPlainText;
     private String possibleIntermediateStepsPlainText;
     private String description;
+
+    public SolveResult(){};
 
     public SolveResult(String inputInterpretationPlainText, String resultsPlainText, String possibleIntermediateStepsPlainText, String description) {
         this.inputInterpretationPlainText = inputInterpretationPlainText;
