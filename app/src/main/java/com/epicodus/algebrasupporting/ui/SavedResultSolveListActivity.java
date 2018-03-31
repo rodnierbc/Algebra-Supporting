@@ -35,22 +35,21 @@ public class SavedResultSolveListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_restaurants);
+        setContentView(R.layout.activity_saved_results_solve);
         ButterKnife.bind(this);
 
-        mRestaurantReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_RESTAURANTS);
+        mAlgebraSupportingReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_RESULT_SOLVE);
         setUpFirebaseAdapter();
     }
-
     private void setUpFirebaseAdapter() {
-        mFirebaseAdapter = new FirebaseRecyclerAdapter<Restaurant, FirebaseRestaurantViewHolder>
-                (Restaurant.class, R.layout.restaurant_list_item, FirebaseRestaurantViewHolder.class,
-                        mRestaurantReference) {
+        mFirebaseAdapter = new FirebaseRecyclerAdapter<SolveResult, FirebaseResultSolveViewHolder>
+                (SolveResult.class, R.layout.result_solve_list_item, FirebaseResultSolveViewHolder.class,
+                        mAlgebraSupportingReference) {
 
             @Override
-            protected void populateViewHolder(FirebaseRestaurantViewHolder viewHolder,
-                                              Restaurant model, int position) {
-                viewHolder.bindRestaurant(model);
+            protected void populateViewHolder(FirebaseResultSolveViewHolder viewHolder,
+                                              SolveResult model, int position) {
+                viewHolder.bindResultSolve(model);
             }
         };
         mRecyclerView.setHasFixedSize(true);

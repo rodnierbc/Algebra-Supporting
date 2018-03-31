@@ -28,9 +28,6 @@ import java.util.ArrayList;
  */
 
 public class FirebaseResultSolveViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-    //private static final int MAX_WIDTH = 200;
-    //private static final int MAX_HEIGHT = 200;
-
     View mView;
     Context mContext;
 
@@ -42,20 +39,8 @@ public class FirebaseResultSolveViewHolder extends RecyclerView.ViewHolder imple
     }
 
     public void bindResultSolve(SolveResult solveResult) {
-        ImageView restaurantImageView = (ImageView) mView.findViewById(R.id.restaurantImageView);
-        TextView nameTextView = (TextView) mView.findViewById(R.id.restaurantNameTextView);
-        TextView categoryTextView = (TextView) mView.findViewById(R.id.categoryTextView);
-        TextView ratingTextView = (TextView) mView.findViewById(R.id.ratingTextView);
-
-        Picasso.with(mContext)
-                .load(restaurant.getImageUrl())
-                .resize(MAX_WIDTH, MAX_HEIGHT)
-                .centerCrop()
-                .into(restaurantImageView);
-
-        nameTextView.setText(restaurant.getName());
-        categoryTextView.setText(restaurant.getCategories().get(0));
-        ratingTextView.setText("Rating: " + restaurant.getRating() + "/5");
+        TextView mInputInterpretationTextView = (TextView) mView.findViewById(R.id.inputInterpretationTextView);
+        mInputInterpretationTextView.setText(solveResult.getInputInterpretationPlainText());
     }
 
     @Override
@@ -72,9 +57,9 @@ public class FirebaseResultSolveViewHolder extends RecyclerView.ViewHolder imple
 
                 int itemPosition = getLayoutPosition();
 
-                Intent intent = new Intent(mContext, RestaurantDetailActivity.class);
+                Intent intent = new Intent(mContext, ResultSolveDetailActivity.class);
                 intent.putExtra("position", itemPosition + "");
-                intent.putExtra("restaurants", Parcels.wrap(restaurants));
+                intent.putExtra("solveResults", Parcels.wrap(solveResults));
 
                 mContext.startActivity(intent);
             }

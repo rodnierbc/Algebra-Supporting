@@ -28,7 +28,7 @@ public class ResultSolveDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_result_solve_detail);
         ButterKnife.bind(this);
 
-        mSolveResults = Parcels.unwrap(getIntent().getParcelableExtra("solveResult"));
+        mSolveResults = Parcels.unwrap(getIntent().getParcelableExtra("solveResults"));
         int startingPosition = getIntent().getIntExtra("position", 0);
 
         adapterViewPager = new ResultSolvePagerAdapter(getSupportFragmentManager(), mSolveResults);

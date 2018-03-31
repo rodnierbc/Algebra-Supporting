@@ -28,10 +28,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class ResultSolveDetailFragment extends Fragment {
-    @BindView(R.id.inputInterpretationTextView) TextView mInputInterpretationTextView;
-    @BindView(R.id.possibleIntermediateStepsTextView) TextView mPossibleIntermediateStepsTextView;
-    @BindView(R.id.resultsTextView) TextView mResultsTextView;
-    @BindView(R.id.resultsTextView) TextView descriptionTextView;
+    @BindView(R.id.inputInterpretationTextView1) TextView mInputInterpretationTextView1;
+    //@BindView(R.id.possibleIntermediateStepsTextView) TextView mPossibleIntermediateStepsTextView;
+    //@BindView(R.id.resultsTextView) TextView mResultsTextView;
+    //@BindView(R.id.descriptionTextView) TextView mDescriptionTextView;
 
 
     private SolveResult mSolveResult;
@@ -55,10 +55,11 @@ public class ResultSolveDetailFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_result_solve_detail, container, false);
         ButterKnife.bind(this, view);
 
-        mInputInterpretationTextView.setText(mSolveResult.getInputInterpretationPlainText());
-        mPossibleIntermediateStepsTextView.setText(mSolveResult.getPossibleIntermediateStepsPlainText());
-        mResultsTextView.setText(mSolveResult.getResultsPlainText());
-        descriptionTextView.setText(mSolveResult.getDescription());
+        mInputInterpretationTextView1.setText(mSolveResult.getInputInterpretationPlainText());
+        //mPossibleIntermediateStepsTextView.setText(mSolveResult.getPossibleIntermediateStepsPlainText());
+        //mResultsTextView.setText(mSolveResult.getResultsPlainText());
+        //mDescriptionTextView.setText(mSolveResult.getDescription());
+
         return view;
     }
 
