@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.epicodus.algebrasupporting">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -22,28 +23,25 @@
         <activity android:name=".ui.SolveActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.epicodus.algebrasupporting.ui.SolveActivity">
-            </meta-data>
+                android:value="com.epicodus.algebrasupporting.ui.SolveActivity" />
         </activity>
         <activity android:name=".ui.ResultSolveActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.epicodus.algebrasupporting.ui.ResultSolveActivity">
-            </meta-data>
+                android:value="com.epicodus.algebrasupporting.ui.ResultSolveActivity" />
         </activity>
         <activity android:name=".ui.SavedResultSolveListActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.epicodus.algebrasupporting.ui.SavedResultSolveListActivity">
-            </meta-data>
+                android:value="com.epicodus.algebrasupporting.ui.SavedResultSolveListActivity" />
         </activity>
         <activity android:name=".ui.ResultSolveDetailActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.epicodus.algebrasupporting.ui.ResultSolveDetailActivity">
-            </meta-data>
+                android:value="com.epicodus.algebrasupporting.ui.ResultSolveDetailActivity" />
         </activity>
-
+        <activity android:name=".ui.CreateAccountActivity" />
+        <activity android:name=".ui.LoginActivity"></activity>
     </application>
 
 </manifest>

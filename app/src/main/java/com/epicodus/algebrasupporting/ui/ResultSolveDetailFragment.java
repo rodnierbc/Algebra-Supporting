@@ -29,9 +29,9 @@ import butterknife.ButterKnife;
 
 public class ResultSolveDetailFragment extends Fragment {
     @BindView(R.id.inputInterpretationTextView1) TextView mInputInterpretationTextView1;
-    //@BindView(R.id.possibleIntermediateStepsTextView) TextView mPossibleIntermediateStepsTextView;
-    //@BindView(R.id.resultsTextView) TextView mResultsTextView;
-    //@BindView(R.id.descriptionTextView) TextView mDescriptionTextView;
+    @BindView(R.id.possibleIntermediateStepsTextView) TextView mPossibleIntermediateStepsTextView;
+    @BindView(R.id.resultsTextView) TextView mResultsTextView;
+    @BindView(R.id.descriptionTextView) TextView mDescriptionTextView;
 
 
     private SolveResult mSolveResult;
@@ -39,7 +39,7 @@ public class ResultSolveDetailFragment extends Fragment {
     public static ResultSolveDetailFragment newInstance(SolveResult mSolveResultModel) {
         ResultSolveDetailFragment resultSolveDetailFragment = new ResultSolveDetailFragment();
         Bundle args = new Bundle();
-        args.putParcelable("solveResult", Parcels.wrap(mSolveResultModel));
+        args.putParcelable("solveResults", Parcels.wrap(mSolveResultModel));
         resultSolveDetailFragment.setArguments(args);
         return resultSolveDetailFragment;
     }
@@ -47,7 +47,7 @@ public class ResultSolveDetailFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mSolveResult = Parcels.unwrap(getArguments().getParcelable("solveResult"));
+        mSolveResult = Parcels.unwrap(getArguments().getParcelable("solveResults"));
     }
 
     @Override
@@ -56,9 +56,9 @@ public class ResultSolveDetailFragment extends Fragment {
         ButterKnife.bind(this, view);
 
         mInputInterpretationTextView1.setText(mSolveResult.getInputInterpretationPlainText());
-        //mPossibleIntermediateStepsTextView.setText(mSolveResult.getPossibleIntermediateStepsPlainText());
-        //mResultsTextView.setText(mSolveResult.getResultsPlainText());
-        //mDescriptionTextView.setText(mSolveResult.getDescription());
+        mPossibleIntermediateStepsTextView.setText(mSolveResult.getPossibleIntermediateStepsPlainText());
+        mResultsTextView.setText(mSolveResult.getResultsPlainText());
+        mDescriptionTextView.setText(mSolveResult.getDescription());
 
         return view;
     }

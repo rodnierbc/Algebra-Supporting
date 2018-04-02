@@ -40,7 +40,9 @@ public class FirebaseResultSolveViewHolder extends RecyclerView.ViewHolder imple
 
     public void bindResultSolve(SolveResult solveResult) {
         TextView mInputInterpretationTextView = (TextView) mView.findViewById(R.id.inputInterpretationTextView);
+        TextView mResultsTextView = (TextView) mView.findViewById(R.id.resultsTextView);
         mInputInterpretationTextView.setText(solveResult.getInputInterpretationPlainText());
+        mResultsTextView.setText(solveResult.getResultsPlainText());
     }
 
     @Override
