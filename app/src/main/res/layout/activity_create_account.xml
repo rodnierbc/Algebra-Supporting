@@ -31,6 +31,8 @@
         android:ems="10"
         android:hint="Name"
         android:inputType="textPersonName"
+        android:textColor="@color/colorPrimaryText"
+        android:textColorHint="@color/colorHints"
         android:textSize="16dp" />
 
     <EditText
@@ -45,6 +47,8 @@
         android:ems="10"
         android:hint="Email"
         android:inputType="textEmailAddress"
+        android:textColor="@color/colorPrimaryText"
+        android:textColorHint="@color/colorHints"
         android:textSize="16dp" />
 
     <EditText
@@ -59,6 +63,8 @@
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
+        android:textColor="@color/colorPrimaryText"
+        android:textColorHint="@color/colorHints"
         android:textSize="16dp" />
 
     <EditText
@@ -73,6 +79,8 @@
         android:ems="10"
         android:hint="Confirm Password"
         android:inputType="textPassword"
+        android:textColor="@color/colorPrimaryText"
+        android:textColorHint="@color/colorHints"
         android:textSize="16dp" />
 
     <android.support.v7.widget.CardView
