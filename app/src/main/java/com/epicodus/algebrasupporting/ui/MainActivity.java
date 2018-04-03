@@ -18,6 +18,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @BindView(R.id.mainOptionsList) ListView mMainOptionsList;
     @BindView(R.id.savedResultsSolveButton)
     Button mSavedResultsSolveButton;
+    @BindView(R.id.loginButton)
+    Button mLoginButton;
 
     private String[] mOptions = new String[] {"Evaluate","Solve","Plot"};
 
@@ -27,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         mSavedResultsSolveButton.setOnClickListener(this);
+        mLoginButton.setOnClickListener(this);
 
         final MainOptionsArrayAdapter adapter = new MainOptionsArrayAdapter(this, android.R.layout.simple_list_item_1, mOptions ); //must match constructor!
         mMainOptionsList.setAdapter(adapter);
@@ -45,6 +48,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         if(v == mSavedResultsSolveButton) {
             Intent intent = new Intent(MainActivity.this, SavedResultSolveListActivity.class);
+            startActivity(intent);
+        }
+        if(v == mLoginButton) {
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(intent);
         }
 

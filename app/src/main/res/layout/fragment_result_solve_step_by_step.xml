@@ -14,8 +14,7 @@
         android:id="@+id/resultSolveStepByStepImageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="fitXY"
-        app:srcCompat="@mipmap/ic_launcher" />
+        android:scaleType="fitXY" />
 
 
 </LinearLayout>
