@@ -14,6 +14,7 @@ public class SolveResult {
     private String resultsPlainText;
     private String possibleIntermediateStepsPlainText;
     private String description;
+    private String pushId;
 
     public SolveResult(){};
 
@@ -55,5 +56,13 @@ public class SolveResult {
     public void setResultsPlainText(String resultsPlainText) {
         this.resultsPlainText = resultsPlainText;
     }
+    public String getPushId() {
+        return pushId;
+    }
+
+    public void setPushId(String pushId) {
+        this.pushId = pushId;
+    }
+
 }
 

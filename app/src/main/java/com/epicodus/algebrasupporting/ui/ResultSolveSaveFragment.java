@@ -14,6 +14,8 @@ import android.widget.Toast;
 import com.epicodus.algebrasupporting.Constants;
 import com.epicodus.algebrasupporting.R;
 import com.epicodus.algebrasupporting.models.SolveResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
@@ -71,11 +73,19 @@ public class ResultSolveSaveFragment extends Fragment implements View.OnClickLis
     public void onClick(View v) {
         if(v == mAddDescriptionButton) {
             mSolveResult.setDescription(descriptionEditText.getText().toString());
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            String uid = user.getUid();
+
+            DatabaseReference resultSolveRef = FirebaseDatabase
+                    .getInstance()
+                    .getReference(Constants.FIREBASE_CHILD_RESULT_SOLVE)
+                    .child(uid);
+            DatabaseReference pushRef = resultSolveRef.push();
+            String pushId = pushRef.getKey();
+            mSolveResult.setPushId(pushId);
+            pushRef.setValue(mSolveResult);
+            Toast.makeText(getContext(), "Saved", Toast.LENGTH_SHORT).show();
         }
-        DatabaseReference resultSolveRef = FirebaseDatabase
-                .getInstance()
-                .getReference(Constants.FIREBASE_CHILD_RESULT_SOLVE);
-        resultSolveRef.push().setValue(mSolveResult);
-        Toast.makeText(getContext(), "Saved", Toast.LENGTH_SHORT).show();
+
     }
 }

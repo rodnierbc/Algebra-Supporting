@@ -12,6 +12,8 @@ import com.epicodus.algebrasupporting.R;
 import com.epicodus.algebrasupporting.models.SolveResult;
 import com.epicodus.algebrasupporting.models.SolveResult;
 import com.epicodus.algebrasupporting.ui.ResultSolveDetailActivity;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -48,7 +50,9 @@ public class FirebaseResultSolveViewHolder extends RecyclerView.ViewHolder imple
     @Override
     public void onClick(View view) {
         final ArrayList<SolveResult> solveResults = new ArrayList<>();
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_RESULT_SOLVE);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = user.getUid();
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_RESULT_SOLVE).child(uid);
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
 
             @Override

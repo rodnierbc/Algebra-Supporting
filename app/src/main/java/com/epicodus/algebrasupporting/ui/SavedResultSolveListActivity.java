@@ -14,6 +14,8 @@ import com.epicodus.algebrasupporting.R;
 import com.epicodus.algebrasupporting.Adapters.FirebaseResultSolveViewHolder;
 import com.epicodus.algebrasupporting.models.SolveResult;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -38,7 +40,13 @@ public class SavedResultSolveListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_saved_results_solve);
         ButterKnife.bind(this);
 
-        mAlgebraSupportingReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_RESULT_SOLVE);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = user.getUid();
+
+        mAlgebraSupportingReference = FirebaseDatabase
+                .getInstance()
+                .getReference(Constants.FIREBASE_CHILD_RESULT_SOLVE)
+                .child(uid);
         setUpFirebaseAdapter();
     }
     private void setUpFirebaseAdapter() {
