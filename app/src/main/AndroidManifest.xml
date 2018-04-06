@@ -38,7 +38,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.epicodus.algebrasupporting.ui.ResultSolveDetailActivity" />
         </activity>
-        <activity android:name=".ui.CreateAccountActivity" />
+        <activity android:name=".ui.CreateAccountActivity"
+                  android:theme="@style/NoActionBarTheme"/>
         <activity android:name=".ui.LoginActivity"></activity>
     </application>
 

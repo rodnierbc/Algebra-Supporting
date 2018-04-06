@@ -1,109 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorPrimary">
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@drawable/gradient_dark_blue"
+    tools:context="com.epicodus.algebrasupporting.ui.SolveActivity">
 
     <TextView
         android:id="@+id/solveTextView"
-        android:layout_width="124dp"
-        android:layout_height="27dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/inputInterpretationSolve"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/inputInterpretationSolve"
+        android:layout_marginTop="51dp"
         android:text="Solve:"
-        android:textColor="@android:color/background_light"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.036"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.083" />
+        android:textColor="@color/colorPrimaryText"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/inputInterpretationSolve"
-        android:layout_width="339dp"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="35dp"
+        android:layout_below="@+id/solveTextView"
         android:layout_centerHorizontal="true"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:background="@android:color/background_light"
-        android:hint="x+2=0"
-        android:padding="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.6"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/solveTextView" />
+        android:layout_marginTop="21dp"
+        android:autofillHints="10dp"
+        android:background="@color/colorPrimaryText"
+        android:defaultFocusHighlightEnabled="false"
+        android:ems="10"
+        android:hint="x^2-9=0"
+        android:inputType="textPersonName" />
 
     <TextView
         android:id="@+id/forTextView"
-        android:layout_width="26dp"
-        android:layout_height="27dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/inputInterpretationSolve"
+        android:layout_alignStart="@+id/inputInterpretationSolve"
+        android:layout_below="@+id/inputInterpretationSolve"
+        android:layout_marginTop="34dp"
         android:text="for"
-        android:textColor="@android:color/background_light"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/inputForVariable"
-        app:layout_constraintHorizontal_bias="0.888"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/solveTextView"
-        app:layout_constraintVertical_bias="0.18" />
-
-    <LinearLayout
-        android:layout_width="330dp"
-        android:layout_height="3dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@android:color/darker_gray"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textColor="@color/colorPrimaryText"
+        android:textSize="18dp"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/inputForVariable"
-        android:layout_width="297dp"
+        android:layout_width="250dp"
         android:layout_height="35dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@android:color/background_light"
-        android:hint="x"
-        android:padding="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.925"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputInterpretationSolve"
-        app:layout_constraintVertical_bias="0.039" />
+        android:layout_alignBottom="@+id/forTextView"
+        android:layout_alignEnd="@+id/inputInterpretationSolve"
+        android:layout_alignRight="@+id/inputInterpretationSolve"
+        android:background="@color/colorPrimaryText"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="x" />
 
-    <Button
-        android:id="@+id/computeSolveButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Compute"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.888" />
+    <android.support.v7.widget.CardView
+        android:id="@+id/computeSolveCardView"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_alignEnd="@+id/inputForVariable"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/inputForVariable"
+        android:layout_marginBottom="39dp"
+        app:cardBackgroundColor="@android:color/holo_orange_dark"
+        app:cardCornerRadius="25dp"
+        app:cardElevation="10dp">
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-</android.support.constraint.ConstraintLayout>
+            <TextView
+                android:id="@+id/computeTextView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Compute"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>

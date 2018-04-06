@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -29,7 +30,8 @@ public class SolveActivity extends AppCompatActivity implements View.OnClickList
     EditText mInputInterpretationSolve;
     @BindView(R.id.inputForVariable)
     EditText minputForVariable;
-    @BindView(R.id.computeSolveButton) Button mComputeSolveButton;
+    @BindView(R.id.computeSolveCardView)
+    CardView mComputeSolveCardView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,12 +39,12 @@ public class SolveActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_solve);
         ButterKnife.bind(this);
 
-        mComputeSolveButton.setOnClickListener(this);
+        mComputeSolveCardView.setOnClickListener(this);
 
     }
     @Override
     public void onClick(View v) {
-        if(v == mComputeSolveButton) {
+        if(v == mComputeSolveCardView) {
             String interpretationSolve = mInputInterpretationSolve.getText().toString();
             String inputForVariable = mInputInterpretationSolve.getText().toString();
             Intent intent = new Intent(SolveActivity.this, ResultSolveActivity.class);

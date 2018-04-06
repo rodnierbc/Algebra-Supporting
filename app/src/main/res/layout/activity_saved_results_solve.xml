@@ -7,7 +7,8 @@
     android:paddingBottom="16dp"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
-    android:paddingTop="16dp">
+    android:paddingTop="16dp"
+    android:background="@drawable/gradient_dark_blue">
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"

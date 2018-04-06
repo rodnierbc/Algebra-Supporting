@@ -1,9 +1,11 @@
 package com.epicodus.algebrasupporting.ui;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -11,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.epicodus.algebrasupporting.Adapters.MainOptionsArrayAdapter;
 import com.epicodus.algebrasupporting.R;
@@ -22,11 +25,14 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     @BindView(R.id.mainOptionsList) ListView mMainOptionsList;
-    @BindView(R.id.savedResultsSolveButton)
-    Button mSavedResultsSolveButton;
+    @BindView(R.id.savedResultsSolveCardView)
+    CardView mSavedResultsSolveCardView;
+    @BindView(R.id.algebraText)
+    TextView mAlgebraText;
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+    FirebaseUser user;
 
 
     private String[] mOptions = new String[] {"Evaluate","Solve","Plot"};
@@ -36,10 +42,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        mSavedResultsSolveButton.setOnClickListener(this);
+        mSavedResultsSolveCardView.setOnClickListener(this);
 
         final MainOptionsArrayAdapter adapter = new MainOptionsArrayAdapter(this, android.R.layout.simple_list_item_1, mOptions ); //must match constructor!
         mMainOptionsList.setAdapter(adapter);
+
+        Typeface kaushanFont = Typeface.createFromAsset(getAssets(), "fonts/kaushanScript-Regular.otf");
+        mAlgebraText.setTypeface(kaushanFont);
 
         mMainOptionsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -51,15 +60,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
         mAuth = FirebaseAuth.getInstance();
         if(mAuth != null){
-           FirebaseUser user = mAuth.getCurrentUser();
+           user = mAuth.getCurrentUser();
            if(user != null){
-               getSupportActionBar().setTitle("Welcome, " + user.getEmail());
+               getSupportActionBar().setTitle(user.getEmail());
+
+           }
+           else {
+               mSavedResultsSolveCardView.setVisibility(View.GONE);
            }
         }
+
     }
     @Override
     public void onClick(View v) {
-        if(v == mSavedResultsSolveButton) {
+        if(v == mSavedResultsSolveCardView) {
             Intent intent = new Intent(MainActivity.this, SavedResultSolveListActivity.class);
             startActivity(intent);
         }
@@ -67,7 +81,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_main, menu);
+        if(user != null){
+            inflater.inflate(R.menu.menu_logout, menu);
+        }
+        else{
+            inflater.inflate(R.menu.menu_login, menu);
+        }
         return super.onCreateOptionsMenu(menu);
     }
     @Override
