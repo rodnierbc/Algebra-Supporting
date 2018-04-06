@@ -1,5 +1,7 @@
 package com.epicodus.algebrasupporting.Adapters;
 
+import android.animation.AnimatorInflater;
+import android.animation.AnimatorSet;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
@@ -13,6 +15,7 @@ import com.epicodus.algebrasupporting.R;
 import com.epicodus.algebrasupporting.models.SolveResult;
 import com.epicodus.algebrasupporting.models.SolveResult;
 import com.epicodus.algebrasupporting.ui.ResultSolveDetailActivity;
+import com.epicodus.algebrasupporting.util.ItemTouchHelperViewHolder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -30,7 +33,7 @@ import java.util.ArrayList;
  * Created by rodnier.borrego on 3/29/18.
  */
 
-public class FirebaseResultSolveViewHolder extends RecyclerView.ViewHolder {
+public class FirebaseResultSolveViewHolder extends RecyclerView.ViewHolder implements ItemTouchHelperViewHolder {
     View mView;
     Context mContext;
     public CardView mResultSolveCardView;
@@ -47,5 +50,20 @@ public class FirebaseResultSolveViewHolder extends RecyclerView.ViewHolder {
         TextView mResultsTextView = (TextView) mView.findViewById(R.id.resultsTextView);
         mInputInterpretationTextView.setText(solveResult.getInputInterpretationPlainText());
         mResultsTextView.setText(solveResult.getResultsPlainText());
+    }
+    @Override
+    public void onItemSelected() {
+        AnimatorSet set = (AnimatorSet) AnimatorInflater.loadAnimator(mContext,
+                R.animator.drag_scale_on);
+        set.setTarget(itemView);
+        set.start();
+    }
+
+    @Override
+    public void onItemClear() {
+        AnimatorSet set = (AnimatorSet) AnimatorInflater.loadAnimator(mContext,
+                R.animator.drag_scale_off);
+        set.setTarget(itemView);
+        set.start();
     }
 }
