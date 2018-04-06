@@ -15,6 +15,7 @@ public class SolveResult {
     private String possibleIntermediateStepsPlainText;
     private String description;
     private String pushId;
+    String index;
 
     public SolveResult(){};
 
@@ -23,6 +24,7 @@ public class SolveResult {
         this.resultsPlainText = resultsPlainText;
         this.possibleIntermediateStepsPlainText = possibleIntermediateStepsPlainText;
         this.description = description;
+        this.index = "not_specified";
     }
 
     public String getInputInterpretationPlainText() {
@@ -62,6 +64,14 @@ public class SolveResult {
 
     public void setPushId(String pushId) {
         this.pushId = pushId;
+    }
+
+    public String getIndex() {
+        return index;
+    }
+
+    public void setIndex(String index) {
+        this.index = index;
     }
 
 }
