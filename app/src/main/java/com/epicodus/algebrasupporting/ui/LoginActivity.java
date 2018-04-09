@@ -3,6 +3,8 @@ package com.epicodus.algebrasupporting.ui;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,6 +19,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.epicodus.algebrasupporting.Constants;
 import com.epicodus.algebrasupporting.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -29,6 +32,10 @@ import butterknife.ButterKnife;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     public static final String TAG = LoginActivity.class.getSimpleName();
+    private SharedPreferences mSharedPreferences;
+    private SharedPreferences.Editor mEditor;
+    private String mUsernameSaved;
+
     @BindView(R.id.registerTextView)
     TextView mRegisterTextView;
     @BindView(R.id.logInCardView)
@@ -47,6 +54,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        ButterKnife.bind(this);
+
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mUsernameSaved = mSharedPreferences.getString(Constants.PREFERENCES_USERNAME_KEY, null);
+        if (mUsernameSaved != null) {
+            mUserNameEditText.setText(mUsernameSaved.toString());
+        }
+        mEditor = mSharedPreferences.edit();
+
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -63,8 +79,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }
             }
         };
-
-        ButterKnife.bind(this);
         mRegisterTextView.setOnClickListener(this);
         mLogInCardView.setOnClickListener(this);
 
@@ -79,6 +93,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             finish();
         }
         if (view == mLogInCardView) {
+            String username = mUserNameEditText.getText().toString();
+            addToSharedPreferences(username);
             loginWithPassword();
         }
     }
@@ -142,6 +158,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (mAuthListener != null) {
             mAuth.removeAuthStateListener(mAuthListener);
         }
+    }
+    private void addToSharedPreferences(String username) {
+        mEditor.putString(Constants.PREFERENCES_USERNAME_KEY, username).apply();
     }
 }
 
